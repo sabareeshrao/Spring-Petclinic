@@ -1,0 +1,67 @@
+name: Deploy PetClinic Learning Site
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PetClinic learning repo
+        uses: actions/checkout@v4
+
+      - name: Checkout master software simulator repo
+        uses: actions/checkout@v4
+        with:
+          repository: sabareeshrao/Experiment-VS-Code
+          ref: main
+          path: .software
+
+      - name: Build Pages artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf _site
+          mkdir -p _site/software
+          cp -a site/. _site/
+          cp -a curriculum _site/curriculum
+          if [ -d project ]; then cp -a project _site/project; fi
+          cp -a .software/simulator _site/software/simulator
+          cp .software/AI_CAPABILITY_INDEX.json _site/software/AI_CAPABILITY_INDEX.json
+          python - <<'PY'
+          import json, pathlib
+          root=pathlib.Path("project")
+          files=[]
+          if root.exists():
+              files=[str(p.relative_to(root)).replace("\\","/") for p in root.rglob("*") if p.is_file()]
+          pathlib.Path("_site/project-files.json").write_text(json.dumps(sorted(files), indent=2))
+          PY
+          software_sha="$(git -C .software rev-parse HEAD)"
+          printf '{\n  "repository": "sabareeshrao/Experiment-VS-Code",\n  "commit": "%s"\n}\n' "$software_sha" > _site/software-snapshot.json
+          touch _site/.nojekyll
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

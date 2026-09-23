@@ -1,0 +1,53 @@
+name: Sync Canonical PetClinic Source
+on:
+  push:
+    branches: [main]
+    paths:
+      - SOURCE_SYNC_TRIGGER
+      - .github/workflows/sync-upstream-source.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Copy canonical Spring PetClinic
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/spring-petclinic project
+          git clone --depth 1 https://github.com/spring-projects/spring-petclinic.git /tmp/spring-petclinic
+          upstream_sha="$(git -C /tmp/spring-petclinic rev-parse HEAD)"
+          rm -rf /tmp/spring-petclinic/.git
+          mkdir -p project
+          cp -a /tmp/spring-petclinic/. project/
+          cat > SOURCE_SNAPSHOT.json <<JSON
+          {
+            "upstream_repository": "spring-projects/spring-petclinic",
+            "upstream_branch": "main",
+            "upstream_commit": "$upstream_sha",
+            "destination": "project/",
+            "purpose": "Finished canonical reference source used by View Full Code and reconstruction validation."
+          }
+          JSON
+
+      - name: Commit synchronized source
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add project SOURCE_SNAPSHOT.json
+          if git diff --cached --quiet; then
+            echo "Canonical source already synchronized."
+            exit 0
+          fi
+          git commit -m "Sync canonical Spring PetClinic source"
+          git push origin HEAD:main

@@ -1,0 +1,7 @@
+{
+  "upstream_repository": "spring-projects/spring-petclinic",
+  "upstream_branch": "main",
+  "upstream_commit": "818c4136ea971c21674525f9053de0d9c7ad8cfe",
+  "destination": "project/",
+  "purpose": "Finished canonical reference source used by View Full Code and reconstruction validation."
+}
