@@ -48,7 +48,8 @@ for ref in book.get("chapters", []):
                 action = q.get("action") or {"action":"highlightTarget","data":{"target":"project"}}
                 stage["steps"].append({
                     "title": f'{q.get("id","Q")} · {q.get("title", q.get("id","Question"))}',
-                    "why": q.get("question","") + "\n\nAnswer: " + str(q.get("answer","")),
+                    "why": q.get("question",""),
+                    "answer": str(q.get("answer","")),
                     "lesson": lesson.get("title",""),
                     "software": q.get("software","intellij"),
                     "action": action

@@ -6,7 +6,7 @@
   "chapters": [
     {
       "id": "01",
-      "title": "Understand the Finished System Before Rebuilding It",
+      "title": "Establish the PetClinic Project Baseline",
       "source": "chapters/01-understand-finished-system.json",
       "status": "started"
     },

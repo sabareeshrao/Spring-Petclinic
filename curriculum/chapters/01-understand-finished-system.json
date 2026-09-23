@@ -1,72 +1,26 @@
 {
   "id": "01",
-  "title": "Understand the Finished System Before Rebuilding It",
+  "title": "Establish the PetClinic Project Baseline",
   "lessons": [
     {
       "id": "01-01",
-      "title": "Recognize the Application Architecture",
+      "title": "Choose the Project Generator and Build Baseline",
       "questions": [
         {
           "id": "Q0001",
-          "question": "Spring PetClinic is a server-rendered Spring Boot application where Spring MVC controllers coordinate domain objects, persistence, and Thymeleaf views. Before we create any files, which overall application style are we reconstructing?",
-          "answer": "A Spring Boot MVC web application",
-          "software": "intellij",
+          "title": "Start from Spring Initializr",
+          "question": "Spring Initializr creates a Spring Boot project shell and lets us choose the build system, language, Java version, metadata, and dependencies before source files are generated. Which generator should we use to begin the PetClinic reconstruction?",
+          "answer": "Spring Initializr",
+          "software": "spring_initializer",
           "action": {
-            "action": "highlightTarget",
-            "data": {
-              "target": "project"
-            }
-          },
-          "title": "Identify the PetClinic application style"
+            "action": "resetGenerator",
+            "data": {}
+          }
         },
         {
           "id": "Q0002",
-          "question": "Spring PetClinic separates responsibilities across domain classes, repositories, MVC controllers, and Thymeleaf templates. Because later layers depend on earlier ones, should our reconstruction build foundations first or start with pages whose backend types do not yet exist?",
-          "answer": "Build foundations first, then dependents",
-          "software": "intellij",
-          "action": {
-            "action": "highlightTarget",
-            "data": {
-              "target": "tree"
-            }
-          },
-          "title": "Choose a dependency-first reconstruction order"
-        },
-        {
-          "id": "Q0003",
-          "question": "The canonical PetClinic repository includes application code, templates, database scripts, tests, CI workflows, container configuration, and Kubernetes manifests. To truly reproduce the repository from zero to final, where should our reconstruction stop?",
-          "answer": "Only after the full repository, tests, and delivery assets are reconstructed",
-          "software": "intellij",
-          "action": {
-            "action": "highlightTarget",
-            "data": {
-              "target": "project"
-            }
-          },
-          "title": "Define the full reconstruction scope"
-        }
-      ]
-    },
-    {
-      "id": "01-02",
-      "title": "Establish the Build Baseline",
-      "questions": [
-        {
-          "id": "Q0004",
-          "question": "The current PetClinic build requires Java 17 or newer, and Java 17 is the declared project baseline. Which Java version should our reconstruction target first so generated source and build configuration match the project?",
-          "answer": "Java 17",
-          "software": "spring_initializer",
-          "action": {
-            "action": "setJavaVersion",
-            "data": {
-              "value": "17"
-            }
-          },
-          "title": "Use Java 17 as the baseline"
-        },
-        {
-          "id": "Q0005",
-          "question": "PetClinic supports Maven and Gradle, but pom.xml is a primary build definition and gives us a clear first reconstruction path. Which build system should we reproduce first before later adding Gradle parity?",
+          "title": "Choose Maven first",
+          "question": "PetClinic supports Maven and Gradle, but pom.xml is a primary build definition and gives us the first reproducible build path. Which build system should we select first?",
           "answer": "Maven",
           "software": "spring_initializer",
           "action": {
@@ -74,66 +28,110 @@
             "data": {
               "value": "Maven"
             }
-          },
-          "title": "Choose Maven as the first build path"
+          }
+        },
+        {
+          "id": "Q0003",
+          "title": "Choose Java",
+          "question": "Spring PetClinic is implemented in Java. Spring Initializr can generate Java, Kotlin, or Groovy projects. Which language should we select for this reconstruction?",
+          "answer": "Java",
+          "software": "spring_initializer",
+          "action": {
+            "action": "setLanguage",
+            "data": {
+              "value": "Java"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "01-02",
+      "title": "Match PetClinic Metadata",
+      "questions": [
+        {
+          "id": "Q0004",
+          "title": "Use Java 17 as the baseline",
+          "question": "The canonical PetClinic project declares Java 17 as its baseline. Which Java version should we select so the generated project matches that build requirement?",
+          "answer": "Java 17",
+          "software": "spring_initializer",
+          "action": {
+            "action": "setJavaVersion",
+            "data": {
+              "value": "17"
+            }
+          }
+        },
+        {
+          "id": "Q0005",
+          "title": "Set the PetClinic group",
+          "question": "Maven coordinates identify a project with a group and artifact. PetClinic source code lives under org.springframework.samples.petclinic, so which group value should we use before defining the artifact?",
+          "answer": "org.springframework.samples",
+          "software": "spring_initializer",
+          "action": {
+            "action": "setGroup",
+            "data": {
+              "value": "org.springframework.samples"
+            }
+          }
         },
         {
           "id": "Q0006",
-          "question": "Spring component scanning begins from the application's root package, and the canonical project places its code under org.springframework.samples.petclinic. Which base package should our generated project use?",
-          "answer": "org.springframework.samples.petclinic",
+          "title": "Set the PetClinic artifact and package",
+          "question": "The project repository is named spring-petclinic, while the Java base package is org.springframework.samples.petclinic. Which artifact name should we enter now so the generated project carries the PetClinic project identity?",
+          "answer": "spring-petclinic",
           "software": "spring_initializer",
           "action": {
-            "action": "setPackageName",
+            "action": "setArtifact",
             "data": {
-              "value": "org.springframework.samples.petclinic"
+              "value": "spring-petclinic"
             }
-          },
-          "title": "Set the PetClinic base package"
+          }
         }
       ]
     },
     {
       "id": "01-03",
-      "title": "Plan the Real Developer Trajectory",
+      "title": "Choose the First Application Capabilities",
       "questions": [
         {
           "id": "Q0007",
-          "question": "A real developer does not finish every file in isolation; they move among related model, repository, controller, template, test, terminal, and browser contexts as each feature evolves. Should our question sequence follow one-file-at-a-time completion or a deterministic but realistic cross-file workflow?",
-          "answer": "A deterministic but realistic cross-file workflow",
-          "software": "intellij",
+          "title": "Add Spring Web",
+          "question": "PetClinic is a server-rendered Spring MVC application. Spring Web provides the MVC request-handling infrastructure used by controllers and the embedded web application. Which dependency should we add first for the web layer?",
+          "answer": "Spring Web",
+          "software": "spring_initializer",
           "action": {
-            "action": "highlightTarget",
+            "action": "addDependency",
             "data": {
-              "target": "tree"
+              "id": "web"
             }
-          },
-          "title": "Follow a realistic cross-file workflow"
+          }
         },
         {
           "id": "Q0008",
-          "question": "Each question in this course teaches a concept, asks the learner to apply it, and then drives a visible simulator action. What must happen to project state after a question is completed so returning to any later question can reproduce exactly what has been built so far?",
-          "answer": "Project state must advance cumulatively and deterministically",
-          "software": "intellij",
+          "title": "Add Spring Data JPA",
+          "question": "PetClinic persists owners, pets, visits, and veterinarians in relational databases. Spring Data JPA provides repository abstractions on top of JPA and Hibernate. Which dependency should we add for persistence?",
+          "answer": "Spring Data JPA",
+          "software": "spring_initializer",
           "action": {
-            "action": "highlightTarget",
+            "action": "addDependency",
             "data": {
-              "target": "project"
+              "id": "data-jpa"
             }
-          },
-          "title": "Keep project state cumulative"
+          }
         },
         {
           "id": "Q0009",
-          "question": "The finished source under project/ is our reference end state, while the learner-facing workspace begins from zero. Should the simulator initially display the finished source, or reconstruct only the files and edits earned by completed questions?",
-          "answer": "Reconstruct only the state earned by completed questions",
-          "software": "intellij",
+          "title": "Add Validation",
+          "question": "PetClinic validates form data such as names, dates, and other domain inputs before accepting changes. Spring Boot's Validation dependency integrates Jakarta Bean Validation for these rules. Which dependency should we add?",
+          "answer": "Validation",
+          "software": "spring_initializer",
           "action": {
-            "action": "highlightTarget",
+            "action": "addDependency",
             "data": {
-              "target": "editor"
+              "id": "validation"
             }
-          },
-          "title": "Reconstruct instead of revealing finished code"
+          }
         }
       ]
     }
