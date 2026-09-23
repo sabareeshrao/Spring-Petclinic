@@ -1,0 +1,49 @@
+name: Expand preserved question baseline
+
+on:
+  push:
+    paths:
+      - 'bootstrap/preserved-original-1150.tar.gz.b64'
+
+permissions:
+  contents: write
+
+jobs:
+  expand:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Decode preserved baseline
+        run: |
+          base64 --decode bootstrap/preserved-original-1150.tar.gz.b64 > /tmp/preserved-original-1150.tar.gz
+          tar -xzf /tmp/preserved-original-1150.tar.gz
+      - name: Verify baseline
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re, json, hashlib
+          root = Path("preserved-original/books")
+          files = sorted(root.glob("book-*/chapter-*/original-questions.md"))
+          ids = []
+          for f in files:
+              ids += re.findall(r'^## (Q\d{4})\b', f.read_text(), re.M)
+          assert len(files) == 29, len(files)
+          assert len(ids) == 1150, len(ids)
+          assert len(set(ids)) == 1150, len(set(ids))
+          assert ids[0] == "Q0001"
+          assert ids[-1] == "Q1150"
+          print("Verified 29 chapters and 1,150 unique questions.")
+          PY
+      - name: Commit expanded baseline
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add preserved-original
+          if git diff --cached --quiet; then
+            echo "Preserved baseline already expanded."
+          else
+            git commit -m "Expand immutable 1,150-question baseline"
+            git push
+          fi
