@@ -134,6 +134,64 @@
           }
         }
       ]
+    },
+    {
+      "id": "01-04",
+      "title": "Complete the PetClinic Project Identity",
+      "questions": [
+        {
+          "id": "Q0010",
+          "title": "Set the project name to petclinic",
+          "question": "Maven uses the artifact ID for coordinates, but the project can also have a human-readable name. The canonical PetClinic pom.xml declares <name>petclinic</name>. Which project name should we enter so the generated project identity matches the finished application?",
+          "answer": "petclinic",
+          "software": "spring_initializer",
+          "action": {
+            "action": "setName",
+            "data": {
+              "value": "petclinic"
+            }
+          }
+        },
+        {
+          "id": "Q0011",
+          "title": "Correct the Java base package",
+          "question": "Spring Boot component scanning normally starts from the package containing the application class. The canonical PetClinic Java source lives under org.springframework.samples.petclinic, so which package name should we set instead of the artifact-derived org.springframework.samples.springpetclinic?",
+          "answer": "org.springframework.samples.petclinic",
+          "software": "spring_initializer",
+          "action": {
+            "action": "setPackageName",
+            "data": {
+              "value": "org.springframework.samples.petclinic"
+            }
+          }
+        },
+        {
+          "id": "Q0012",
+          "title": "Keep JAR packaging",
+          "question": "Spring Boot can package an application as a JAR or WAR. PetClinic runs as a self-contained Spring Boot application with an embedded web server rather than being deployed as a traditional external-container WAR. Which packaging option should we keep selected?",
+          "answer": "Jar",
+          "software": "spring_initializer",
+          "action": {
+            "action": "setPackaging",
+            "data": {
+              "value": "Jar"
+            }
+          }
+        },
+        {
+          "id": "Q0013",
+          "title": "Use Properties configuration",
+          "question": "Spring Boot supports both .properties and YAML configuration. The canonical PetClinic repository uses application.properties together with profile-specific .properties files under src/main/resources. Which configuration format should the generated project use?",
+          "answer": "Properties",
+          "software": "spring_initializer",
+          "action": {
+            "action": "setConfigFormat",
+            "data": {
+              "value": "Properties"
+            }
+          }
+        }
+      ]
     }
   ]
 }
