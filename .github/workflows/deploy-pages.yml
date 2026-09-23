@@ -20,11 +20,28 @@ jobs:
       - name: Checkout PetClinic learning repo
         uses: actions/checkout@v4
 
+      - name: Resolve stable master runtime
+        id: master-runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          ref="$(tr -d '\r\n' < MASTER_SOFTWARE_REF)"
+          case "$ref" in
+            sabareeshrao/Experiment-VS-Code@*) ;;
+            *) echo "Invalid MASTER_SOFTWARE_REF: $ref" >&2; exit 1 ;;
+          esac
+          sha="${ref##*@}"
+          if ! [[ "$sha" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "MASTER_SOFTWARE_REF must contain an exact 40-character commit SHA." >&2
+            exit 1
+          fi
+          echo "sha=$sha" >> "$GITHUB_OUTPUT"
+
       - name: Checkout authoritative player and simulators
         uses: actions/checkout@v4
         with:
           repository: sabareeshrao/Experiment-VS-Code
-          ref: main
+          ref: ${{ steps.master-runtime.outputs.sha }}
           path: .software
 
       - name: Build exact player-contract Pages artifact
@@ -47,6 +64,11 @@ jobs:
           python scripts/build-player-data.py
 
           software_sha="$(git -C .software rev-parse HEAD)"
+          expected_sha="${{ steps.master-runtime.outputs.sha }}"
+          if [ "$software_sha" != "$expected_sha" ]; then
+            echo "Master runtime mismatch: expected $expected_sha but checked out $software_sha" >&2
+            exit 1
+          fi
           printf '{\n  "repository": "sabareeshrao/Experiment-VS-Code",\n  "commit": "%s"\n}\n' "$software_sha" > _site/software-snapshot.json
           touch _site/.nojekyll
 
