@@ -1,29 +1,20 @@
 # Spring PetClinic — Question-Driven Reconstruction
 
-This repository is the project-specific learning/navigation repository for rebuilding the canonical Spring PetClinic application from zero to final state through teaching questions.
+This repository rebuilds the canonical Spring PetClinic project from zero to final state through teaching questions.
 
-## Architecture
+## Non-negotiable UI contract
 
-- `project/` — full snapshot of the finished canonical `spring-projects/spring-petclinic` repository. This is the reference/end-state source used by **View Full Code**.
-- `curriculum/` — active learning data in the hierarchy **Book → Chapter → Lesson → Question**.
-- `site/` — this project's GitHub Pages navigation/player shell.
-- `archive/original-question-baseline/` — preserved legacy 1,150-question baseline. It is retained for reference and is **not** the active course.
-- Software simulators are owned by `sabareeshrao/Experiment-VS-Code`. This repo does not fork their product UI.
+This repository does **not** own a custom playback UI. Its GitHub Pages build copies the authoritative `player.html`, `app.js`, `styles.css`, and `simulator/` package from `sabareeshrao/Experiment-VS-Code`.
 
-## Simulator model
+PetClinic owns only:
 
-GitHub Pages builds this project by checking out the current master simulator repository and copying its simulator package into the Pages artifact. The PetClinic repo owns the curriculum and project state; the master software repo owns IntelliJ, Spring Initializr, Git, GitHub, database tools, and other simulator UIs.
+- `project/` — complete finished Spring PetClinic reference source for **View Full Code**.
+- `curriculum/` — **Book → Chapter → Lesson → Question** learning data.
+- `scripts/build-player-data.py` — adapts PetClinic curriculum/project data to the master player contract.
+- `archive/original-question-baseline/` — preserved old 1,150-question experiment; not the active curriculum.
+
+Any missing IntelliJ, Spring Initializr, Git, GitHub, database, terminal, or other software capability must be implemented in `Experiment-VS-Code`, then consumed here.
 
 Expected Pages URL:
 
 `https://sabareeshrao.github.io/Spring-Petclinic/`
-
-## Learning rule
-
-Questions must teach before asking:
-
-1. explain the concept,
-2. explain why it matters at the current PetClinic step,
-3. ask the learner to identify/apply the next change,
-4. carry an answer and hidden software action,
-5. advance cumulative project state deterministically.

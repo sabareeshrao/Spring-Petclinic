@@ -20,32 +20,28 @@ jobs:
       - name: Checkout PetClinic learning repo
         uses: actions/checkout@v4
 
-      - name: Checkout master software simulator repo
+      - name: Checkout authoritative player and simulators
         uses: actions/checkout@v4
         with:
           repository: sabareeshrao/Experiment-VS-Code
           ref: main
           path: .software
 
-      - name: Build Pages artifact
+      - name: Build exact player-contract Pages artifact
         shell: bash
         run: |
           set -euo pipefail
           rm -rf _site
-          mkdir -p _site/software
-          cp -a site/. _site/
-          cp -a curriculum _site/curriculum
-          if [ -d project ]; then cp -a project _site/project; fi
-          cp -a .software/simulator _site/software/simulator
-          cp .software/AI_CAPABILITY_INDEX.json _site/software/AI_CAPABILITY_INDEX.json
-          python - <<'PY'
-          import json, pathlib
-          root=pathlib.Path("project")
-          files=[]
-          if root.exists():
-              files=[str(p.relative_to(root)).replace("\\","/") for p in root.rglob("*") if p.is_file()]
-          pathlib.Path("_site/project-files.json").write_text(json.dumps(sorted(files), indent=2))
-          PY
+          mkdir -p _site
+
+          # UI CONTRACT: use the master player unchanged. PetClinic owns data, not player UI.
+          cp .software/player.html _site/index.html
+          cp .software/app.js _site/app.js
+          cp .software/styles.css _site/styles.css
+          cp -a .software/simulator _site/simulator
+
+          python scripts/build-player-data.py
+
           software_sha="$(git -C .software rev-parse HEAD)"
           printf '{\n  "repository": "sabareeshrao/Experiment-VS-Code",\n  "commit": "%s"\n}\n' "$software_sha" > _site/software-snapshot.json
           touch _site/.nojekyll
@@ -53,6 +49,7 @@ jobs:
       - uses: actions/configure-pages@v5
         with:
           enablement: true
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site

@@ -11,21 +11,39 @@
           "question": "Spring PetClinic is a server-rendered Spring Boot application where Spring MVC controllers coordinate domain objects, persistence, and Thymeleaf views. Before we create any files, which overall application style are we reconstructing?",
           "answer": "A Spring Boot MVC web application",
           "software": "intellij",
-          "action": null
+          "action": {
+            "action": "highlightTarget",
+            "data": {
+              "target": "project"
+            }
+          },
+          "title": "Identify the PetClinic application style"
         },
         {
           "id": "Q0002",
           "question": "Spring PetClinic separates responsibilities across domain classes, repositories, MVC controllers, and Thymeleaf templates. Because later layers depend on earlier ones, should our reconstruction build foundations first or start with pages whose backend types do not yet exist?",
           "answer": "Build foundations first, then dependents",
           "software": "intellij",
-          "action": null
+          "action": {
+            "action": "highlightTarget",
+            "data": {
+              "target": "tree"
+            }
+          },
+          "title": "Choose a dependency-first reconstruction order"
         },
         {
           "id": "Q0003",
           "question": "The canonical PetClinic repository includes application code, templates, database scripts, tests, CI workflows, container configuration, and Kubernetes manifests. To truly reproduce the repository from zero to final, where should our reconstruction stop?",
           "answer": "Only after the full repository, tests, and delivery assets are reconstructed",
           "software": "intellij",
-          "action": null
+          "action": {
+            "action": "highlightTarget",
+            "data": {
+              "target": "project"
+            }
+          },
+          "title": "Define the full reconstruction scope"
         }
       ]
     },
@@ -38,21 +56,39 @@
           "question": "The current PetClinic build requires Java 17 or newer, and Java 17 is the declared project baseline. Which Java version should our reconstruction target first so generated source and build configuration match the project?",
           "answer": "Java 17",
           "software": "spring_initializer",
-          "action": null
+          "action": {
+            "action": "setJavaVersion",
+            "data": {
+              "value": "17"
+            }
+          },
+          "title": "Use Java 17 as the baseline"
         },
         {
           "id": "Q0005",
           "question": "PetClinic supports Maven and Gradle, but pom.xml is a primary build definition and gives us a clear first reconstruction path. Which build system should we reproduce first before later adding Gradle parity?",
           "answer": "Maven",
           "software": "spring_initializer",
-          "action": null
+          "action": {
+            "action": "setProjectType",
+            "data": {
+              "value": "Maven"
+            }
+          },
+          "title": "Choose Maven as the first build path"
         },
         {
           "id": "Q0006",
           "question": "Spring component scanning begins from the application's root package, and the canonical project places its code under org.springframework.samples.petclinic. Which base package should our generated project use?",
           "answer": "org.springframework.samples.petclinic",
           "software": "spring_initializer",
-          "action": null
+          "action": {
+            "action": "setPackageName",
+            "data": {
+              "value": "org.springframework.samples.petclinic"
+            }
+          },
+          "title": "Set the PetClinic base package"
         }
       ]
     },
@@ -65,21 +101,39 @@
           "question": "A real developer does not finish every file in isolation; they move among related model, repository, controller, template, test, terminal, and browser contexts as each feature evolves. Should our question sequence follow one-file-at-a-time completion or a deterministic but realistic cross-file workflow?",
           "answer": "A deterministic but realistic cross-file workflow",
           "software": "intellij",
-          "action": null
+          "action": {
+            "action": "highlightTarget",
+            "data": {
+              "target": "tree"
+            }
+          },
+          "title": "Follow a realistic cross-file workflow"
         },
         {
           "id": "Q0008",
           "question": "Each question in this course teaches a concept, asks the learner to apply it, and then drives a visible simulator action. What must happen to project state after a question is completed so returning to any later question can reproduce exactly what has been built so far?",
           "answer": "Project state must advance cumulatively and deterministically",
           "software": "intellij",
-          "action": null
+          "action": {
+            "action": "highlightTarget",
+            "data": {
+              "target": "project"
+            }
+          },
+          "title": "Keep project state cumulative"
         },
         {
           "id": "Q0009",
           "question": "The finished source under project/ is our reference end state, while the learner-facing workspace begins from zero. Should the simulator initially display the finished source, or reconstruct only the files and edits earned by completed questions?",
           "answer": "Reconstruct only the state earned by completed questions",
           "software": "intellij",
-          "action": null
+          "action": {
+            "action": "highlightTarget",
+            "data": {
+              "target": "editor"
+            }
+          },
+          "title": "Reconstruct instead of revealing finished code"
         }
       ]
     }
