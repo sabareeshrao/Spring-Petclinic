@@ -34,33 +34,41 @@ def is_text(data):
 book = read_json(CURRICULUM / "book.json")
 stages = []
 for ref in book.get("chapters", []):
+    if not ref.get("source"):
+        continue
     stage = {
         "title": f'{ref["id"]}. {ref["title"]}',
         "subtitle": "",
         "stepLabel": "questions",
         "steps": []
     }
-    if ref.get("source"):
-        chapter = read_json(CURRICULUM / ref["source"])
-        stage["subtitle"] = chapter.get("title","")
-        for lesson in chapter.get("lessons", []):
-            for q in lesson.get("questions", []):
-                action = q.get("action") or {"action":"highlightTarget","data":{"target":"project"}}
-                stage["steps"].append({
-                    "title": f'{q.get("id","Q")} · {q.get("title", q.get("id","Question"))}',
-                    "why": q.get("question",""),
-                    "answer": str(q.get("answer","")),
-                    "lesson": lesson.get("title",""),
-                    "software": q.get("software","intellij"),
-                    "action": action
-                })
-    stages.append(stage)
+    chapter = read_json(CURRICULUM / ref["source"])
+    stage["subtitle"] = chapter.get("title","")
+    for lesson in chapter.get("lessons", []):
+        for q in lesson.get("questions", []):
+            action = q.get("action") or {"action":"highlightTarget","data":{"target":"project"}}
+            stage["steps"].append({
+                "title": f'{q.get("id","Q")} · {q.get("title", q.get("id","Question"))}',
+                "why": q.get("question",""),
+                "answer": str(q.get("answer","")),
+                "lesson": lesson.get("title",""),
+                "software": q.get("software","intellij"),
+                "action": action
+            })
+    if stage["steps"]:
+        stages.append(stage)
 
 course = {
     "title": book.get("title","Build Spring PetClinic from Zero to Final"),
     "subtitle": "Question-driven reconstruction using the Experiment-VS-Code player contract.",
     "stepLabel": "questions",
-    "books": [{"title":book.get("title","Spring PetClinic"),"chapters":len(book.get("chapters",[]))}],
+    "books": [{
+        "id":"book-1",
+        "title":book.get("title","Spring PetClinic"),
+        "subtitle":"Build the canonical Spring PetClinic project from zero through teaching questions.",
+        "chapterStart":1,
+        "chapterEnd":max(1,len(stages))
+    }],
     "package": {
         "apps": {
             "intellij_idea": {
@@ -70,10 +78,10 @@ course = {
                 "database":{},"tests":{},"terminal":"","console":"","visibleFeatures":[]
             },
             "spring_initializer": {
-                "projectType":"Maven","language":"Java","bootVersion":"4.1.0",
-                "group":"org.springframework.samples","artifact":"spring-petclinic",
-                "name":"spring-petclinic","packageName":"org.springframework.samples.petclinic",
-                "description":"Spring PetClinic Sample Application","packaging":"Jar",
+                "projectType":"Maven","language":"Java","bootVersion":"3.5.6",
+                "group":"com.example","artifact":"demo",
+                "name":"demo","packageName":"com.example.demo",
+                "description":"Demo project for Spring Boot","packaging":"Jar",
                 "javaVersion":"17","configFormat":"Properties","dependencies":[]
             }
         }

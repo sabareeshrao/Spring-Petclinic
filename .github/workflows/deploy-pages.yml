@@ -34,8 +34,12 @@ jobs:
           rm -rf _site
           mkdir -p _site
 
-          # UI CONTRACT: use the master player unchanged. PetClinic owns data, not player UI.
-          cp .software/player.html _site/index.html
+          # UI CONTRACT: copy the master Library + player unchanged.
+          # PetClinic owns curriculum/project data only.
+          cp .software/index.html _site/index.html
+          cp .software/library.js _site/library.js
+          cp .software/library.css _site/library.css
+          cp .software/player.html _site/player.html
           cp .software/app.js _site/app.js
           cp .software/styles.css _site/styles.css
           cp -a .software/simulator _site/simulator
