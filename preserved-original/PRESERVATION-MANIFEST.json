@@ -1,0 +1,209 @@
+{
+  "question_count": 1150,
+  "chapter_count": 29,
+  "files": [
+    {
+      "chapter": 1,
+      "source": "01-understand-the-finished-system-before-rebuilding-it.md",
+      "path": "petclinic-preserve-stage/preserved-original/books/book-01-project-foundation/chapter-01-understand-the-finished-system-before-rebuilding-it/original-questions.md",
+      "sha256": "66a5afc1ad20347d6c97c70766533e957ec357ada5acf241682bddb4772e0a3f",
+      "bytes": 6375
+    },
+    {
+      "chapter": 2,
+      "source": "02-generate-the-spring-boot-project-shell.md",
+      "path": "petclinic-preserve-stage/preserved-original/books/book-01-project-foundation/chapter-02-generate-the-spring-boot-project-shell/original-questions.md",
+      "sha256": "a3ef5012533a9f0d6a2bf485755e5161d300574091713626a74bb2afbd76ae5b",
+      "bytes": 11304
+    },
+    {
+      "chapter": 3,
+      "source": "03-shape-pom-xml-to-match-petclinic.md",
+      "path": "petclinic-preserve-stage/preserved-original/books/book-01-project-foundation/chapter-03-shape-pom-xml-to-match-petclinic/original-questions.md",
+      "sha256": "32b774836e605acfd4bae283a3482f6b5a724cce362f3014cacb00037c4f8c84",
+      "bytes": 29620
+    },
+    {
+      "chapter": 4,
+      "source": "04-create-the-application-entry-point-and-runtime-hints.md",
+      "path": "petclinic-preserve-stage/preserved-original/books/book-01-project-foundation/chapter-04-create-the-application-entry-point-and-runtime-hints/original-questions.md",
+      "sha256": "f9268b421275f12d8d597998dc84c2e2005b61a3b8e2a85e05681b30cc0b9fab",
+      "bytes": 10780
+    },
+    {
+      "chapter": 5,
+      "source": "05-configure-the-default-h2-application-profile.md",
+      "path": "petclinic-preserve-stage/preserved-original/books/book-02-persistence-foundation/chapter-05-configure-the-default-h2-application-profile/original-questions.md",
+      "sha256": "c9f485c7dd4d684be5fd183abb3f9c03a04089bf679ca2c45be4193703e8a502",
+      "bytes": 7658
+    },
+    {
+      "chapter": 6,
+      "source": "06-create-the-relational-schema-and-seed-data.md",
+      "path": "petclinic-preserve-stage/preserved-original/books/book-02-persistence-foundation/chapter-06-create-the-relational-schema-and-seed-data/original-questions.md",
+      "sha256": "3bd7edbc09bb069d707ad3e34219fe6895e93ba9a4457c0893896b925974a3e9",
+      "bytes": 20514
+    },
+    {
+      "chapter": 7,
+      "source": "07-build-the-reusable-domain-model-foundation.md",
+      "path": "petclinic-preserve-stage/preserved-original/books/book-03-domain-foundation/chapter-07-build-the-reusable-domain-model-foundation/original-questions.md",
+      "sha256": "4877587e73b54f0c3ccc01b8343133bcd295f357eb8fedb7c86f76c72e664459",
+      "bytes": 13610
+    },
+    {
+      "chapter": 8,
+      "source": "08-build-the-owner-aggregate-and-repository.md",
+      "path": "petclinic-preserve-stage/preserved-original/books/book-04-owner-feature/chapter-08-build-the-owner-aggregate-and-repository/original-questions.md",
+      "sha256": "6eb7634f7294c32d59299e19b55de8323f2257a5af484ccfae4f58e48d825ef4",
+      "bytes": 20465
+    },
+    {
+      "chapter": 9,
+      "source": "09-implement-owner-web-flows.md",
+      "path": "petclinic-preserve-stage/preserved-original/books/book-04-owner-feature/chapter-09-implement-owner-web-flows/original-questions.md",
+      "sha256": "cd73ed53e8984b1a35faa201faab3356402f8629c2085c2e5b1323b9c37f9b3c",
+      "bytes": 30318
+    },
+    {
+      "chapter": 10,
+      "source": "10-build-pets-pet-types-formatting-and-validation.md",
+      "path": "petclinic-preserve-stage/preserved-original/books/book-05-pet-feature/chapter-10-build-pets-pet-types-formatting-and-validation/original-questions.md",
+      "sha256": "37e3a8724dc3e0ec7d66524b0e728730e211bf0d7d3838c81fc36a3d1ae0d21a",
+      "bytes": 24472
+    },
+    {
+      "chapter": 11,
+      "source": "11-implement-pet-create-and-edit-flows.md",
+      "path": "petclinic-preserve-stage/preserved-original/books/book-05-pet-feature/chapter-11-implement-pet-create-and-edit-flows/original-questions.md",
+      "sha256": "13a5ee24fd644a34d8f18f7b9a2d729e8320187d79f0334a7dc3e6fdb1e05d54",
+      "bytes": 31312
+    },
+    {
+      "chapter": 12,
+      "source": "12-build-visits-and-appointment-booking.md",
+      "path": "petclinic-preserve-stage/preserved-original/books/book-06-visit-feature/chapter-12-build-visits-and-appointment-booking/original-questions.md",
+      "sha256": "e46f73c468b7ea2fe5c3b6ee2de4676e26a6415961a8971208b99319e025ad65",
+      "bytes": 17210
+    },
+    {
+      "chapter": 13,
+      "source": "13-build-veterinarian-domain-objects-and-repository.md",
+      "path": "petclinic-preserve-stage/preserved-original/books/book-07-veterinarian-feature/chapter-13-build-veterinarian-domain-objects-and-repository/original-questions.md",
+      "sha256": "468dcf42530264f3bb0661e9ab8af13fbc0bdc75cec4a71f6d7f2545ef7cff78",
+      "bytes": 20032
+    },
+    {
+      "chapter": 14,
+      "source": "14-expose-veterinarian-pages-data-and-caching.md",
+      "path": "petclinic-preserve-stage/preserved-original/books/book-07-veterinarian-feature/chapter-14-expose-veterinarian-pages-data-and-caching/original-questions.md",
+      "sha256": "a5f1bde093d9d9df7e69684a699882fc88b90a155301577226da8863c7cf1794",
+      "bytes": 16072
+    },
+    {
+      "chapter": 15,
+      "source": "15-add-welcome-error-locale-and-web-configuration.md",
+      "path": "petclinic-preserve-stage/preserved-original/books/book-08-application-and-system-layer/chapter-15-add-welcome-error-locale-and-web-configuration/original-questions.md",
+      "sha256": "0f8c6d52404214c0fc8e22a4fb67544da2b99727dbe6b2aef01f65a9dd104fff",
+      "bytes": 17398
+    },
+    {
+      "chapter": 16,
+      "source": "16-build-the-thymeleaf-layout-and-reusable-form-fragments.md",
+      "path": "petclinic-preserve-stage/preserved-original/books/book-09-thymeleaf-ui/chapter-16-build-the-thymeleaf-layout-and-reusable-form-fragments/original-questions.md",
+      "sha256": "dc1d2ebdb2da2c1a96d4d3c6dc10c57ec106871db5866742e6bcd8e956a5f4d6",
+      "bytes": 16336
+    },
+    {
+      "chapter": 17,
+      "source": "17-build-owner-search-list-form-and-details-views.md",
+      "path": "petclinic-preserve-stage/preserved-original/books/book-09-thymeleaf-ui/chapter-17-build-owner-search-list-form-and-details-views/original-questions.md",
+      "sha256": "2c5b2a8be3fc7ed862d93ab1dde15971cf9abd713c35927530c20b07c6fa25f0",
+      "bytes": 10194
+    },
+    {
+      "chapter": 18,
+      "source": "18-build-pet-and-visit-forms.md",
+      "path": "petclinic-preserve-stage/preserved-original/books/book-09-thymeleaf-ui/chapter-18-build-pet-and-visit-forms/original-questions.md",
+      "sha256": "814b2a10d52258ed2b28e5b86dfcbc4a1846a08249523e61ea681ca63d4784a5",
+      "bytes": 7576
+    },
+    {
+      "chapter": 19,
+      "source": "19-build-veterinarian-welcome-and-error-pages.md",
+      "path": "petclinic-preserve-stage/preserved-original/books/book-09-thymeleaf-ui/chapter-19-build-veterinarian-welcome-and-error-pages/original-questions.md",
+      "sha256": "23a815af787278f2b84271adb07eba7559ca24ee1317f583ea9ce4971c6498e5",
+      "bytes": 8602
+    },
+    {
+      "chapter": 20,
+      "source": "20-add-localization-and-static-resources.md",
+      "path": "petclinic-preserve-stage/preserved-original/books/book-09-thymeleaf-ui/chapter-20-add-localization-and-static-resources/original-questions.md",
+      "sha256": "52736aedb463f95791ba43ebfc9729931a6c9d8f157e3fca268cbdae75acaa76",
+      "bytes": 6183
+    },
+    {
+      "chapter": 21,
+      "source": "21-add-mysql-postgresql-and-local-database-containers.md",
+      "path": "petclinic-preserve-stage/preserved-original/books/book-10-databases-and-runtime-profiles/chapter-21-add-mysql-postgresql-and-local-database-containers/original-questions.md",
+      "sha256": "7653174c573036b255673ab1e956ed2d140f7bcbd562945c3f1d3e8aa74d0540",
+      "bytes": 8511
+    },
+    {
+      "chapter": 22,
+      "source": "22-test-domain-rules-validators-and-repository-adjacent-behavior.md",
+      "path": "petclinic-preserve-stage/preserved-original/books/book-11-testing-and-verification/chapter-22-test-domain-rules-validators-and-repository-adjacent-behavior/original-questions.md",
+      "sha256": "d00c2c60ec855679e1b055af87e6140f85ef6893ec5cad4fad93f228f9f49d70",
+      "bytes": 7905
+    },
+    {
+      "chapter": 23,
+      "source": "23-test-controller-routes-and-mvc-behavior.md",
+      "path": "petclinic-preserve-stage/preserved-original/books/book-11-testing-and-verification/chapter-23-test-controller-routes-and-mvc-behavior/original-questions.md",
+      "sha256": "de8e8baa4cb5d03657de8121e054062620a4b995d704a250a9cd86b9dc4c3b77",
+      "bytes": 10115
+    },
+    {
+      "chapter": 24,
+      "source": "24-add-full-integration-database-container-i18n-and-concurrency-tests.md",
+      "path": "petclinic-preserve-stage/preserved-original/books/book-11-testing-and-verification/chapter-24-add-full-integration-database-container-i18n-and-concurrency-tests/original-questions.md",
+      "sha256": "eccf94f0f5b7c646a36a13043293ca8fa0a148ce698c6562182845663f12f589",
+      "bytes": 8054
+    },
+    {
+      "chapter": 25,
+      "source": "25-add-formatting-quality-gates-coverage-sbom-and-native-support.md",
+      "path": "petclinic-preserve-stage/preserved-original/books/book-12-build-and-delivery/chapter-25-add-formatting-quality-gates-coverage-sbom-and-native-support/original-questions.md",
+      "sha256": "2f86663b5f7360234cdd4ebf1a1ce99c6a5bc2742e51f562fc7036739065ca07",
+      "bytes": 8188
+    },
+    {
+      "chapter": 26,
+      "source": "26-add-gradle-parity-without-changing-application-behavior.md",
+      "path": "petclinic-preserve-stage/preserved-original/books/book-12-build-and-delivery/chapter-26-add-gradle-parity-without-changing-application-behavior/original-questions.md",
+      "sha256": "ccc324fe781dc62bc40cfe2289471330b477ca58ef4f83b01b8204b84f119ae2",
+      "bytes": 7212
+    },
+    {
+      "chapter": 27,
+      "source": "27-automate-builds-with-github-actions.md",
+      "path": "petclinic-preserve-stage/preserved-original/books/book-12-build-and-delivery/chapter-27-automate-builds-with-github-actions/original-questions.md",
+      "sha256": "c818086b8857359df8cc0086dd65ff2d2c42215a75a163f69b9acd3ec316ee2d",
+      "bytes": 5610
+    },
+    {
+      "chapter": 28,
+      "source": "28-add-kubernetes-database-and-application-deployment-manifests.md",
+      "path": "petclinic-preserve-stage/preserved-original/books/book-12-build-and-delivery/chapter-28-add-kubernetes-database-and-application-deployment-manifests/original-questions.md",
+      "sha256": "bc6adcda1efab98893701e4f70d95d51cfd91f2a930dc987f6f3788af247a5be",
+      "bytes": 8623
+    },
+    {
+      "chapter": 29,
+      "source": "29-add-development-environments-and-perform-final-reconstruction-verification.md",
+      "path": "petclinic-preserve-stage/preserved-original/books/book-12-build-and-delivery/chapter-29-add-development-environments-and-perform-final-reconstruction-verification/original-questions.md",
+      "sha256": "ccc854b4ba81863cef292725aff60d181b7901871b3b46c6c04f74d9c4bff997",
+      "bytes": 9765
+    }
+  ]
+}
