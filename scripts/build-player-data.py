@@ -52,8 +52,8 @@ for ref in book.get("chapters", []):
                 "why": q.get("question",""),
                 "answer": str(q.get("answer","")),
                 "originalActionTranscript": (
-                    json.dumps(q.get("original_action"), indent=2, ensure_ascii=False)
-                    if q.get("original_action") is not None
+                    str(q.get("original_action", {}).get("description",""))
+                    if isinstance(q.get("original_action"), dict)
                     else str(q.get("original_action_transcript",""))
                 ),
                 "lesson": lesson.get("title",""),
