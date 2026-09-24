@@ -51,6 +51,11 @@ for ref in book.get("chapters", []):
                 "title": f'{q.get("id","Q")} · {q.get("title", q.get("id","Question"))}',
                 "why": q.get("question",""),
                 "answer": str(q.get("answer","")),
+                "originalActionTranscript": (
+                    json.dumps(q.get("original_action"), indent=2, ensure_ascii=False)
+                    if q.get("original_action") is not None
+                    else str(q.get("original_action_transcript",""))
+                ),
                 "lesson": lesson.get("title",""),
                 "software": q.get("software","intellij"),
                 "action": action

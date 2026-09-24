@@ -213,6 +213,19 @@
               "language": "java",
               "content": "package experimental;\n\npublic class HumanDemo {\n    public static void main(String[] args) {\n        Human obj = new Human();\n        System.out.println(obj.age + \" : \" + obj.name);\n    }\n}\n\nclass Human {\n    int age;\n    String name;\n\n    public Human() {\n        age = 12;\n        name = \"John\";\n    }\n}"
             }
+          },
+          "original_action": {
+            "step": 1,
+            "action_type": "inspect_code",
+            "description": "Observe an existing Human object that receives default values.",
+            "code": "Human obj = new Human();",
+            "knowledge": [
+              "object creation",
+              "constructor invocation"
+            ],
+            "ui_features": [
+              "code editor"
+            ]
           }
         },
         {
@@ -229,6 +242,20 @@
               "position": "after",
               "code": "\n        Human obj1 = new Human(18, \"Naveen\");"
             }
+          },
+          "original_action": {
+            "step": 2,
+            "action_type": "attempt_object_creation",
+            "description": "Create a second Human object while attempting to pass a custom age and name.",
+            "code": "Human obj1 = new Human(18, \"Naveen\");",
+            "knowledge": [
+              "constructor arguments",
+              "custom object initialization"
+            ],
+            "ui_features": [
+              "code editor",
+              "syntax/error inspection"
+            ]
           }
         },
         {
@@ -249,6 +276,20 @@
                 }
               ]
             }
+          },
+          "original_action": {
+            "step": 3,
+            "action_type": "observe_compile_error",
+            "description": "Observe that the IDE reports an error because Human currently has no constructor accepting int and String.",
+            "expected_problem": "No matching constructor for Human(int, String)",
+            "knowledge": [
+              "constructor signature matching"
+            ],
+            "ui_features": [
+              "error underline",
+              "error marker",
+              "constructor mismatch feedback"
+            ]
           }
         },
         {
@@ -265,6 +306,20 @@
               "position": "before",
               "code": "    public Human(int a, String n) {\n    }\n\n"
             }
+          },
+          "original_action": {
+            "step": 4,
+            "action_type": "create_constructor",
+            "description": "Create a constructor accepting an integer and a string.",
+            "code": "public Human(int a, String n) {\n}",
+            "knowledge": [
+              "parameterized constructors",
+              "constructor syntax"
+            ],
+            "ui_features": [
+              "code editor",
+              "autocompletion"
+            ]
           }
         },
         {
@@ -280,6 +335,20 @@
               "find": "    public Human(int a, String n) {\n    }\n\n",
               "replace": "    public Human(int a, String n) {\n        age = a;\n        name = n;\n    }\n\n"
             }
+          },
+          "original_action": {
+            "step": 5,
+            "action_type": "assign_constructor_parameters",
+            "description": "Assign the incoming constructor arguments to the object's fields.",
+            "code": "public Human(int a, String n) {\n    age = a;\n    name = n;\n}",
+            "knowledge": [
+              "parameters",
+              "instance variables",
+              "object initialization"
+            ],
+            "ui_features": [
+              "code editor"
+            ]
           }
         },
         {
@@ -297,6 +366,23 @@
                 "line": 6
               }
             }
+          },
+          "original_action": {
+            "step": 6,
+            "action_type": "explain_parameter_flow",
+            "description": "Connect the values passed from new Human(18, \"Naveen\") to the constructor parameters.",
+            "value_flow": [
+              {
+                "argument": 18,
+                "parameter": "a",
+                "field": "age"
+              },
+              {
+                "argument": "Naveen",
+                "parameter": "n",
+                "field": "name"
+              }
+            ]
           }
         },
         {
@@ -314,6 +400,20 @@
                 "line": 5
               }
             }
+          },
+          "original_action": {
+            "step": 7,
+            "action_type": "compare_constructor_types",
+            "description": "Compare object creation without arguments to object creation with arguments.",
+            "examples": [
+              "new Human()",
+              "new Human(18, \"Naveen\")"
+            ],
+            "knowledge": [
+              "no-argument constructor",
+              "parameterized constructor",
+              "constructor overloading"
+            ]
           }
         },
         {
@@ -330,6 +430,16 @@
               "position": "after",
               "code": "\n        System.out.println(obj.age + \" : \" + obj.name);"
             }
+          },
+          "original_action": {
+            "step": 8,
+            "action_type": "duplicate_output_statement",
+            "description": "Create another output statement so values from both Human objects can be compared.",
+            "ui_features": [
+              "copy line",
+              "paste line",
+              "edit variable name"
+            ]
           }
         },
         {
@@ -347,6 +457,13 @@
                 "line": 7
               }
             }
+          },
+          "original_action": {
+            "step": 9,
+            "action_type": "print_first_object",
+            "description": "Print values belonging to the object created without arguments.",
+            "code": "System.out.println(obj.age + \" : \" + obj.name);",
+            "expected_output": "12 : John"
           }
         },
         {
@@ -362,6 +479,13 @@
               "find": "        System.out.println(obj.age + \" : \" + obj.name);\n        System.out.println(obj.age + \" : \" + obj.name);",
               "replace": "        System.out.println(obj.age + \" : \" + obj.name);\n        System.out.println(obj1.age + \" : \" + obj1.name);"
             }
+          },
+          "original_action": {
+            "step": 10,
+            "action_type": "print_second_object",
+            "description": "Print values belonging to the object created with custom constructor arguments.",
+            "code": "System.out.println(obj1.age + \" : \" + obj1.name);",
+            "expected_output": "18 : Naveen"
           }
         },
         {
@@ -377,6 +501,16 @@
               "mainClass": "experimental.HumanDemo",
               "console": "12 : John\n18 : Naveen\n\nProcess finished with exit code 0"
             }
+          },
+          "original_action": {
+            "step": 11,
+            "action_type": "run_program",
+            "description": "Compile and run the application.",
+            "ui_features": [
+              "Run command",
+              "Java compilation",
+              "console"
+            ]
           }
         },
         {
@@ -390,6 +524,16 @@
             "data": {
               "text": "12 : John\n18 : Naveen\n\nProcess finished with exit code 0"
             }
+          },
+          "original_action": {
+            "step": 12,
+            "action_type": "inspect_output",
+            "description": "Verify that the two objects contain different data.",
+            "expected_console": [
+              "12 : John",
+              "18 : Naveen"
+            ],
+            "learning_result": "Each object can receive independent values through a constructor."
           }
         },
         {
@@ -404,6 +548,19 @@
               "file": "src/main/java/experimental/HumanDemo.java",
               "code": "package experimental;\n\npublic class HumanDemo {\n    public static void main(String[] args) {\n        Human obj = new Human();\n        System.out.println(obj.age + \" : \" + obj.name);\n    }\n}\n\nclass Human {\n    int age;\n    String name;\n}"
             }
+          },
+          "original_action": {
+            "step": 13,
+            "action_type": "temporarily_remove_constructor",
+            "description": "Remove or comment the explicitly declared constructor to demonstrate Java's automatic constructor behavior.",
+            "ui_features": [
+              "code selection",
+              "comment code",
+              "delete code"
+            ],
+            "knowledge": [
+              "compiler-provided default constructor"
+            ]
           }
         },
         {
@@ -417,6 +574,12 @@
             "data": {
               "message": "Compiler-provided constructor: public Human() { }"
             }
+          },
+          "original_action": {
+            "step": 14,
+            "action_type": "explain_implicit_constructor",
+            "description": "Explain that when no constructor is declared, Java automatically supplies a no-argument constructor.",
+            "conceptual_equivalent": "public Human() {\n}"
           }
         },
         {
@@ -435,6 +598,17 @@
                 "name"
               ]
             }
+          },
+          "original_action": {
+            "step": 15,
+            "action_type": "open_ide_generation_feature",
+            "description": "Use the IDE's source/code generation capability to generate constructors.",
+            "spoken_feature": "Source Action / Constructor generation",
+            "canonical_ide_feature": "Generate Constructor",
+            "ui_features": [
+              "source/code generation menu",
+              "constructor generation dialog"
+            ]
           }
         },
         {
@@ -453,6 +627,15 @@
               ],
               "selection": "age, name"
             }
+          },
+          "original_action": {
+            "step": 16,
+            "action_type": "select_fields_for_constructor",
+            "description": "Select age and name so the IDE generates a constructor accepting both fields.",
+            "selected_fields": [
+              "age",
+              "name"
+            ]
           }
         },
         {
@@ -471,6 +654,17 @@
               ],
               "content": "package experimental;\n\npublic class HumanDemo {\n    public static void main(String[] args) {\n        Human obj = new Human();\n        System.out.println(obj.age + \" : \" + obj.name);\n    }\n}\n\nclass Human {\n    int age;\n    String name;\n\n    public Human(int age, String name) {\n        this.age = age;\n        this.name = name;\n    }\n}"
             }
+          },
+          "original_action": {
+            "step": 17,
+            "action_type": "generate_parameterized_constructor",
+            "description": "Allow the IDE to generate a constructor containing age and name parameters.",
+            "code": "public Human(int age, String name) {\n    this.age = age;\n    this.name = name;\n}",
+            "knowledge": [
+              "IDE code generation",
+              "this keyword",
+              "parameterized constructor"
+            ]
           }
         },
         {
@@ -486,6 +680,15 @@
               "selectedFields": [],
               "content": "package experimental;\n\npublic class HumanDemo {\n    public static void main(String[] args) {\n        Human obj = new Human();\n        System.out.println(obj.age + \" : \" + obj.name);\n    }\n}\n\nclass Human {\n    int age;\n    String name;\n\n    public Human(int age, String name) {\n        this.age = age;\n        this.name = name;\n    }\n\n    public Human() {\n    }\n}"
             }
+          },
+          "original_action": {
+            "step": 18,
+            "action_type": "generate_no_argument_constructor",
+            "description": "Use the IDE constructor-generation feature again to create a no-argument constructor.",
+            "code": "public Human() {\n}",
+            "ui_features": [
+              "constructor generation action"
+            ]
           }
         },
         {
@@ -501,6 +704,15 @@
               "find": "    public Human() {\n    }",
               "replace": "    public Human() {\n        age = 12;\n        name = \"John\";\n    }"
             }
+          },
+          "original_action": {
+            "step": 19,
+            "action_type": "add_default_values",
+            "description": "Add predefined values to the no-argument constructor.",
+            "code": "public Human() {\n    age = 12;\n    name = \"John\";\n}",
+            "knowledge": [
+              "constructor initialization"
+            ]
           }
         },
         {
@@ -518,6 +730,17 @@
                 "line": 16
               }
             }
+          },
+          "original_action": {
+            "step": 20,
+            "action_type": "explain_this_keyword",
+            "description": "Compare parameter names with instance-variable names and explain why this is used.",
+            "code": "this.age = age;\nthis.name = name;",
+            "knowledge": [
+              "this keyword",
+              "field shadowing",
+              "current object"
+            ]
           }
         },
         {
@@ -535,6 +758,18 @@
               ],
               "content": "package experimental;\n\npublic class HumanDemo {\n    public static void main(String[] args) {\n        Human obj = new Human();\n        System.out.println(obj.age + \" : \" + obj.name);\n    }\n}\n\nclass Human {\n    int age;\n    String name;\n\n    public Human(int age, String name) {\n        this.age = age;\n        this.name = name;\n    }\n\n    public Human() {\n        age = 12;\n        name = \"John\";\n    }\n\n    public Human(String name) {\n        this.name = name;\n    }\n}"
             }
+          },
+          "original_action": {
+            "step": 21,
+            "action_type": "generate_single_parameter_constructor",
+            "description": "Use the IDE generation feature to create another constructor accepting only name.",
+            "selected_fields": [
+              "name"
+            ],
+            "code": "public Human(String name) {\n    this.name = name;\n}",
+            "knowledge": [
+              "constructor overloading"
+            ]
           }
         },
         {
@@ -551,6 +786,15 @@
               "position": "after",
               "code": "\n        Human obj2 = new Human(\"Naveen\");"
             }
+          },
+          "original_action": {
+            "step": 22,
+            "action_type": "create_object_with_one_argument",
+            "description": "Create another Human object by supplying only the name.",
+            "code": "Human obj2 = new Human(\"Naveen\");",
+            "knowledge": [
+              "overloaded constructor selection"
+            ]
           }
         },
         {
@@ -564,6 +808,15 @@
             "data": {
               "message": "obj2.age = 0 because the name-only constructor has not assigned age."
             }
+          },
+          "original_action": {
+            "step": 23,
+            "action_type": "explain_uninitialized_int",
+            "description": "Explain that age remains 0 when the constructor does not assign a value to it.",
+            "expected_age_without_manual_assignment": 0,
+            "knowledge": [
+              "default int field value"
+            ]
           }
         },
         {
@@ -579,6 +832,16 @@
               "find": "    public Human(String name) {\n        this.name = name;\n    }",
               "replace": "    public Human(String name) {\n        this.name = name;\n        this.age = 12;\n    }"
             }
+          },
+          "original_action": {
+            "step": 24,
+            "action_type": "assign_default_age",
+            "description": "Modify the single-name constructor so objects created with only a name receive age 12.",
+            "code": "public Human(String name) {\n    this.name = name;\n    this.age = 12;\n}",
+            "knowledge": [
+              "custom defaults",
+              "constructor overloading"
+            ]
           }
         }
       ]
