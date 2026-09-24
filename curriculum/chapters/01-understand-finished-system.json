@@ -192,6 +192,396 @@
           }
         }
       ]
+    },
+    {
+      "id": "EXP-CONSTRUCTORS-24",
+      "title": "[EXPERIMENTAL — DELETE LATER] Java Constructors UI Action Test",
+      "experimental": true,
+      "delete_later": true,
+      "source": "Uploaded 24-action Java Constructors JSON",
+      "questions": [
+        {
+          "id": "EXP-C01",
+          "title": "Inspect the no-argument object",
+          "question": "A constructor runs when an object is created. Here Human() assigns age 12 and name John before new Human() finishes. After `Human obj = new Human();`, what values should obj contain?",
+          "answer": "age = 12 and name = John",
+          "software": "intellij",
+          "action": {
+            "action": "createFile",
+            "data": {
+              "path": "src/main/java/experimental/HumanDemo.java",
+              "language": "java",
+              "content": "package experimental;\n\npublic class HumanDemo {\n    public static void main(String[] args) {\n        Human obj = new Human();\n        System.out.println(obj.age + \" : \" + obj.name);\n    }\n}\n\nclass Human {\n    int age;\n    String name;\n\n    public Human() {\n        age = 12;\n        name = \"John\";\n    }\n}"
+            }
+          }
+        },
+        {
+          "id": "EXP-C02",
+          "title": "Pass custom values during object creation",
+          "question": "To initialize a second Human with its own age and name at creation time, the arguments must be passed inside new Human(...). Which object-creation statement requests age 18 and name Naveen?",
+          "answer": "Human obj1 = new Human(18, \"Naveen\");",
+          "software": "intellij",
+          "action": {
+            "action": "typeCode",
+            "data": {
+              "file": "src/main/java/experimental/HumanDemo.java",
+              "marker": "        Human obj = new Human();",
+              "position": "after",
+              "code": "\n        Human obj1 = new Human(18, \"Naveen\");"
+            }
+          }
+        },
+        {
+          "id": "EXP-C03",
+          "title": "Recognize the constructor mismatch",
+          "question": "Java matches constructor calls by their parameter lists. Human currently has no constructor accepting int and String, so why is `new Human(18, \"Naveen\")` invalid?",
+          "answer": "There is no matching Human(int, String) constructor yet.",
+          "software": "intellij",
+          "action": {
+            "action": "showEditorDiagnostics",
+            "data": {
+              "problems": [
+                {
+                  "severity": "error",
+                  "message": "No matching constructor for Human(int, String)",
+                  "file": "src/main/java/experimental/HumanDemo.java",
+                  "line": 6
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "EXP-C04",
+          "title": "Declare the matching parameterized constructor",
+          "question": "A constructor has the same name as its class and no return type. Which constructor signature can receive the int and String supplied by new Human(18, \"Naveen\")?",
+          "answer": "public Human(int a, String n)",
+          "software": "intellij",
+          "action": {
+            "action": "typeCode",
+            "data": {
+              "file": "src/main/java/experimental/HumanDemo.java",
+              "marker": "    public Human() {",
+              "position": "before",
+              "code": "    public Human(int a, String n) {\n    }\n\n"
+            }
+          }
+        },
+        {
+          "id": "EXP-C05",
+          "title": "Store constructor parameters in fields",
+          "question": "Constructor parameters only hold the incoming values unless we copy them into the object's fields. What assignments make the new Human keep a and n as its age and name?",
+          "answer": "age = a; and name = n;",
+          "software": "intellij",
+          "action": {
+            "action": "replaceCode",
+            "data": {
+              "file": "src/main/java/experimental/HumanDemo.java",
+              "find": "    public Human(int a, String n) {\n    }\n\n",
+              "replace": "    public Human(int a, String n) {\n        age = a;\n        name = n;\n    }\n\n"
+            }
+          }
+        },
+        {
+          "id": "EXP-C06",
+          "title": "Trace arguments into object state",
+          "question": "In `new Human(18, \"Naveen\")`, arguments flow into constructor parameters and then fields. What is the complete value flow for the two arguments?",
+          "answer": "18 → a → age, and Naveen → n → name.",
+          "software": "intellij",
+          "action": {
+            "action": "highlightTarget",
+            "data": {
+              "target": {
+                "type": "line",
+                "file": "src/main/java/experimental/HumanDemo.java",
+                "line": 6
+              }
+            }
+          }
+        },
+        {
+          "id": "EXP-C07",
+          "title": "Compare constructor signatures",
+          "question": "Constructor overloading lets one class offer different initialization choices. Which signatures are selected by `new Human()` and `new Human(18, \"Naveen\")`?",
+          "answer": "Human() and Human(int, String), respectively.",
+          "software": "intellij",
+          "action": {
+            "action": "highlightTarget",
+            "data": {
+              "target": {
+                "type": "line",
+                "file": "src/main/java/experimental/HumanDemo.java",
+                "line": 5
+              }
+            }
+          }
+        },
+        {
+          "id": "EXP-C08",
+          "title": "Duplicate the output statement",
+          "question": "To compare the two Human objects in the console, we need a second print statement before changing its variable. Which existing output line should be duplicated?",
+          "answer": "System.out.println(obj.age + \" : \" + obj.name);",
+          "software": "intellij",
+          "action": {
+            "action": "typeCode",
+            "data": {
+              "file": "src/main/java/experimental/HumanDemo.java",
+              "marker": "        System.out.println(obj.age + \" : \" + obj.name);",
+              "position": "after",
+              "code": "\n        System.out.println(obj.age + \" : \" + obj.name);"
+            }
+          }
+        },
+        {
+          "id": "EXP-C09",
+          "title": "Predict the first object's output",
+          "question": "The first object uses the no-argument constructor, which assigns age 12 and name John. What should its print statement display?",
+          "answer": "12 : John",
+          "software": "intellij",
+          "action": {
+            "action": "highlightTarget",
+            "data": {
+              "target": {
+                "type": "line",
+                "file": "src/main/java/experimental/HumanDemo.java",
+                "line": 7
+              }
+            }
+          }
+        },
+        {
+          "id": "EXP-C10",
+          "title": "Print the second object's values",
+          "question": "The duplicated print line still refers to obj. Which variable should the second print use so it displays the object created with 18 and Naveen?",
+          "answer": "obj1",
+          "software": "intellij",
+          "action": {
+            "action": "replaceCode",
+            "data": {
+              "file": "src/main/java/experimental/HumanDemo.java",
+              "find": "        System.out.println(obj.age + \" : \" + obj.name);\n        System.out.println(obj.age + \" : \" + obj.name);",
+              "replace": "        System.out.println(obj.age + \" : \" + obj.name);\n        System.out.println(obj1.age + \" : \" + obj1.name);"
+            }
+          }
+        },
+        {
+          "id": "EXP-C11",
+          "title": "Run the constructor example",
+          "question": "Running the program now tests whether the two constructor paths produce independent object state. What two lines should appear in the console?",
+          "answer": "12 : John, then 18 : Naveen",
+          "software": "intellij",
+          "action": {
+            "action": "runJavaMain",
+            "data": {
+              "name": "HumanDemo",
+              "mainClass": "experimental.HumanDemo",
+              "console": "12 : John\n18 : Naveen\n\nProcess finished with exit code 0"
+            }
+          }
+        },
+        {
+          "id": "EXP-C12",
+          "title": "Verify independent object values",
+          "question": "The console shows `12 : John` for obj and `18 : Naveen` for obj1. What does this demonstrate about constructor-based initialization?",
+          "answer": "Each object can receive and keep its own initialization values.",
+          "software": "intellij",
+          "action": {
+            "action": "showRunConsole",
+            "data": {
+              "text": "12 : John\n18 : Naveen\n\nProcess finished with exit code 0"
+            }
+          }
+        },
+        {
+          "id": "EXP-C13",
+          "title": "Temporarily remove declared constructors",
+          "question": "Java supplies a no-argument constructor automatically only when the class declares no constructor. What should happen if we temporarily remove the explicitly declared constructors from Human?",
+          "answer": "The compiler can provide an implicit no-argument Human() constructor.",
+          "software": "intellij",
+          "action": {
+            "action": "setCode",
+            "data": {
+              "file": "src/main/java/experimental/HumanDemo.java",
+              "code": "package experimental;\n\npublic class HumanDemo {\n    public static void main(String[] args) {\n        Human obj = new Human();\n        System.out.println(obj.age + \" : \" + obj.name);\n    }\n}\n\nclass Human {\n    int age;\n    String name;\n}"
+            }
+          }
+        },
+        {
+          "id": "EXP-C14",
+          "title": "Identify the compiler-provided constructor",
+          "question": "With no constructor declared in Human, Java provides a default constructor. What is its conceptual no-argument form?",
+          "answer": "public Human() { }",
+          "software": "intellij",
+          "action": {
+            "action": "showNotification",
+            "data": {
+              "message": "Compiler-provided constructor: public Human() { }"
+            }
+          }
+        },
+        {
+          "id": "EXP-C15",
+          "title": "Open IntelliJ constructor generation",
+          "question": "Instead of typing constructor boilerplate manually, IntelliJ can generate it from class fields. Which IDE feature should we open?",
+          "answer": "Generate Constructor",
+          "software": "intellij",
+          "action": {
+            "action": "generateConstructor",
+            "data": {
+              "file": "src/main/java/experimental/HumanDemo.java",
+              "feature": "Generate Constructor",
+              "availableFields": [
+                "age",
+                "name"
+              ]
+            }
+          }
+        },
+        {
+          "id": "EXP-C16",
+          "title": "Choose fields for the generated constructor",
+          "question": "To generate the constructor that accepts both object properties, which fields should be selected in the constructor-generation dialog?",
+          "answer": "age and name",
+          "software": "intellij",
+          "action": {
+            "action": "generateConstructor",
+            "data": {
+              "file": "src/main/java/experimental/HumanDemo.java",
+              "selectedFields": [
+                "age",
+                "name"
+              ],
+              "selection": "age, name"
+            }
+          }
+        },
+        {
+          "id": "EXP-C17",
+          "title": "Generate the two-parameter constructor",
+          "question": "When IntelliJ generates a constructor for age and name, parameter names can match field names. Which assignments distinguish the current object's fields from those parameters?",
+          "answer": "this.age = age; and this.name = name;",
+          "software": "intellij",
+          "action": {
+            "action": "generateConstructor",
+            "data": {
+              "file": "src/main/java/experimental/HumanDemo.java",
+              "selectedFields": [
+                "age",
+                "name"
+              ],
+              "content": "package experimental;\n\npublic class HumanDemo {\n    public static void main(String[] args) {\n        Human obj = new Human();\n        System.out.println(obj.age + \" : \" + obj.name);\n    }\n}\n\nclass Human {\n    int age;\n    String name;\n\n    public Human(int age, String name) {\n        this.age = age;\n        this.name = name;\n    }\n}"
+            }
+          }
+        },
+        {
+          "id": "EXP-C18",
+          "title": "Generate a no-argument constructor",
+          "question": "The class can overload constructors by using different parameter lists. Which additional constructor lets callers create a Human without passing any arguments?",
+          "answer": "public Human() { }",
+          "software": "intellij",
+          "action": {
+            "action": "generateConstructor",
+            "data": {
+              "file": "src/main/java/experimental/HumanDemo.java",
+              "selectedFields": [],
+              "content": "package experimental;\n\npublic class HumanDemo {\n    public static void main(String[] args) {\n        Human obj = new Human();\n        System.out.println(obj.age + \" : \" + obj.name);\n    }\n}\n\nclass Human {\n    int age;\n    String name;\n\n    public Human(int age, String name) {\n        this.age = age;\n        this.name = name;\n    }\n\n    public Human() {\n    }\n}"
+            }
+          }
+        },
+        {
+          "id": "EXP-C19",
+          "title": "Add defaults to the no-argument constructor",
+          "question": "An explicitly written no-argument constructor can choose its own starting values. What values should it assign to reproduce the original default Human state?",
+          "answer": "age = 12 and name = John",
+          "software": "intellij",
+          "action": {
+            "action": "replaceCode",
+            "data": {
+              "file": "src/main/java/experimental/HumanDemo.java",
+              "find": "    public Human() {\n    }",
+              "replace": "    public Human() {\n        age = 12;\n        name = \"John\";\n    }"
+            }
+          }
+        },
+        {
+          "id": "EXP-C20",
+          "title": "Understand this inside a constructor",
+          "question": "When a constructor parameter has the same name as a field, `this` refers to the current object. In `this.age = age`, what does the left-side `this.age` mean?",
+          "answer": "The age field belonging to the current Human object.",
+          "software": "intellij",
+          "action": {
+            "action": "highlightTarget",
+            "data": {
+              "target": {
+                "type": "line",
+                "file": "src/main/java/experimental/HumanDemo.java",
+                "line": 16
+              }
+            }
+          }
+        },
+        {
+          "id": "EXP-C21",
+          "title": "Generate a name-only overloaded constructor",
+          "question": "Constructor overloading can also accept only selected values. Which constructor signature lets callers provide a name while leaving age to another initialization rule?",
+          "answer": "public Human(String name)",
+          "software": "intellij",
+          "action": {
+            "action": "generateConstructor",
+            "data": {
+              "file": "src/main/java/experimental/HumanDemo.java",
+              "selectedFields": [
+                "name"
+              ],
+              "content": "package experimental;\n\npublic class HumanDemo {\n    public static void main(String[] args) {\n        Human obj = new Human();\n        System.out.println(obj.age + \" : \" + obj.name);\n    }\n}\n\nclass Human {\n    int age;\n    String name;\n\n    public Human(int age, String name) {\n        this.age = age;\n        this.name = name;\n    }\n\n    public Human() {\n        age = 12;\n        name = \"John\";\n    }\n\n    public Human(String name) {\n        this.name = name;\n    }\n}"
+            }
+          }
+        },
+        {
+          "id": "EXP-C22",
+          "title": "Create an object with the name-only constructor",
+          "question": "Now that Human(String name) exists, which statement creates a third object by supplying only Naveen?",
+          "answer": "Human obj2 = new Human(\"Naveen\");",
+          "software": "intellij",
+          "action": {
+            "action": "typeCode",
+            "data": {
+              "file": "src/main/java/experimental/HumanDemo.java",
+              "marker": "        Human obj = new Human();",
+              "position": "after",
+              "code": "\n        Human obj2 = new Human(\"Naveen\");"
+            }
+          }
+        },
+        {
+          "id": "EXP-C23",
+          "title": "Predict the uninitialized int field",
+          "question": "Human(String name) assigns name but does not assign age. Java instance int fields default to 0, so what value does obj2.age have at this point?",
+          "answer": "0",
+          "software": "intellij",
+          "action": {
+            "action": "showNotification",
+            "data": {
+              "message": "obj2.age = 0 because the name-only constructor has not assigned age."
+            }
+          }
+        },
+        {
+          "id": "EXP-C24",
+          "title": "Give the name-only constructor a custom default age",
+          "question": "A constructor can supply an internal default for a value the caller did not provide. What assignment should we add so Human(\"Naveen\") receives age 12?",
+          "answer": "this.age = 12;",
+          "software": "intellij",
+          "action": {
+            "action": "replaceCode",
+            "data": {
+              "file": "src/main/java/experimental/HumanDemo.java",
+              "find": "    public Human(String name) {\n        this.name = name;\n    }",
+              "replace": "    public Human(String name) {\n        this.name = name;\n        this.age = 12;\n    }"
+            }
+          }
+        }
+      ]
     }
   ]
 }
